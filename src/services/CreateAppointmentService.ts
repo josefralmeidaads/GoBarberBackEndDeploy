@@ -14,7 +14,7 @@ class CreateAppointmentService {
     
     const appointmentDate = startOfHour(date); // informando a data inicial e convertendo a string date para a Date do JS
 
-      const findAppointmentInSameDate = appointmentsRepository.findByDate(appointmentDate);
+      const findAppointmentInSameDate = await appointmentsRepository.findByDate(appointmentDate);
   
       if(findAppointmentInSameDate){
          throw Error('This appointment is already booked');

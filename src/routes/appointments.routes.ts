@@ -1,10 +1,14 @@
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
+
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import AppointmentRepository from '../repositories/AppointmentsRepository';
 import CreateApointmentService from '../services/CreateAppointmentService';
 
 const appointmentsRouter = Router();
+
+appointmentsRouter.use(ensureAuthenticated);// todas as rotas será validadas por essa middleware de autenticação
 
 appointmentsRouter.get('/', async(request, response) => {
     const appointmentsRepository = getCustomRepository(AppointmentRepository);

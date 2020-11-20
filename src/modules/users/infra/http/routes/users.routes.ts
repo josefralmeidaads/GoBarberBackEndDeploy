@@ -4,7 +4,7 @@ import multer from 'multer';
 import uploadConfig from '@config/upload';
 
 import UpdateAvatarUsersService from '@modules/users/services/UpdateAvatarUserService';
-import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import CreateUserService from '@modules/users/services/CreateUserService';
 
 const usersRouter = Router();

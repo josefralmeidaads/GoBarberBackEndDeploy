@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
+import AppError from '../errors/AppError';
 
 interface TokenPayload {
   iat: number;
@@ -14,7 +15,7 @@ export default function ensureAuthenticated(request:Request , response:Response,
     const authHeader = request.headers.authorization; // recebo o token do meu header
 
     if(!authHeader){ // verifico se existe um token
-        throw new Error('JWT token is missging!');
+        throw new AppError('JWT token is missging!', 401);
     }
 
     const [, token] = authHeader.split(' '); // separo as palavras Beare e Token acesso somente o token
@@ -28,6 +29,6 @@ export default function ensureAuthenticated(request:Request , response:Response,
 
       return next();// se o token for validado ele pode listar e criar um agendamento
     }catch {
-      throw new Error('JWT Token is invalid!');// se não, então não posso fazer nada!
+      throw new AppError('JWT Token is invalid!', 401);// se não, então não posso fazer nada!
     }
 }

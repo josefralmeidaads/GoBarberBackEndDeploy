@@ -1,32 +1,14 @@
 import { Router } from 'express';
-import { parseISO } from 'date-fns';
-import { getCustomRepository } from 'typeorm';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
-import AppointmentRepository from '@modules/appointments/repositories/AppointmentsRepository';
-import CreateApointmentService from '@modules/appointments/services/CreateAppointmentService';
+
+import AppointmentsController from '@modules/appointments/infra/http/controllers/AppointmentsController';
+
+const appointmentsController = new AppointmentsController();
 
 const appointmentsRouter = Router();
-
 appointmentsRouter.use(ensureAuthenticated);// todas as rotas será validadas por essa middleware de autenticação
 
-appointmentsRouter.get('/', async(request, response) => {
-    const appointmentsRepository = getCustomRepository(AppointmentRepository);
-    const appointments = await appointmentsRepository.find();
-    return response.json(appointments);
-});
-
-appointmentsRouter.post('/', async(request, response) => {
-      const { provider_id , date } = request.body;
-
-      const parsedDate = parseISO(date);
-
-      const createApointmentService = new CreateApointmentService();
-
-      const appointment = await createApointmentService.execute({ provider_id, date: parsedDate});
-    
-      return response.status(200).json(appointment);
-    
-})
+appointmentsRouter.post('/', appointmentsController.create);
 
 export default appointmentsRouter;

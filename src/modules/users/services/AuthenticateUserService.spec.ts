@@ -4,14 +4,20 @@ import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHa
 import AuthenticateUsersService from '@modules/users/services/AuthenticateUserService';
 import CreateUsersService from '@modules/users/services/CreateUserService';
 
-describe(' Authenticate User Service', () => {
-  it('Should be able to authenticate', async() => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider(); 
-    
-    const authenticateUserService = new AuthenticateUsersService(fakeUsersRepository, fakeHashProvider);
-    const createUsersService = new CreateUsersService(fakeUsersRepository, fakeHashProvider);
+let fakeUsersRepository : FakeUsersRepository;
+let fakeHashProvider : FakeHashProvider;
+let authenticateUserService : AuthenticateUsersService;
+let createUsersService: CreateUsersService;   
 
+describe(' Authenticate User Service', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+    authenticateUserService = new AuthenticateUsersService(fakeUsersRepository, fakeHashProvider);
+    createUsersService = new CreateUsersService(fakeUsersRepository, fakeHashProvider);
+  });
+
+  it('Should be able to authenticate', async() => {
     const user = await createUsersService.execute({
       name: 'jose',
       email: 'ze.ssva.batera@gmail.com',
@@ -28,11 +34,6 @@ describe(' Authenticate User Service', () => {
   });
 
   it('Should not be able to authenticate with non existing user', async() => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider(); 
-    
-    const authenticateUserService = new AuthenticateUsersService(fakeUsersRepository, fakeHashProvider);
-
     expect(authenticateUserService.execute({
       email: 'ze.ssva.batera@gmail.com',
       password: '12345678',
@@ -40,13 +41,7 @@ describe(' Authenticate User Service', () => {
   });
 
   it('Should not be able to authenticate within user password incorrect', async() => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider(); 
-    
-    const authenticateUserService = new AuthenticateUsersService(fakeUsersRepository, fakeHashProvider);
-    const createUsersService = new CreateUsersService(fakeUsersRepository, fakeHashProvider);
-
-    const user = await createUsersService.execute({
+    await createUsersService.execute({
       name: 'jose',
       email: 'ze.ssva.batera@gmail.com',
       password: '12345678',

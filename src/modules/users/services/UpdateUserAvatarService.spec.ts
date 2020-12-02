@@ -3,14 +3,18 @@ import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepo
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import UpdateUsersService from '@modules/users/services/UpdateAvatarUserService';
 
+let fakeUsersRepository : FakeUsersRepository;
+let fakeStorageProvider : FakeStorageProvider;
+let updateUsersService : UpdateUsersService;
+
 describe('Update User Avatar', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeStorageProvider = new FakeStorageProvider();
+    updateUsersService = new UpdateUsersService(fakeUsersRepository, fakeStorageProvider);
+  });
 
   it('should be able update new User', async() => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
-    const updateUsersService = new UpdateUsersService(fakeUsersRepository, fakeStorageProvider);
-
     const user = fakeUsersRepository.create({
       name: 'jose',
       email: 'ze.ssva.batera@gmail.com',
@@ -26,11 +30,6 @@ describe('Update User Avatar', () => {
   });
 
   it('should not be able update new user not existing', async() => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
-    const updateUsersService = new UpdateUsersService(fakeUsersRepository, fakeStorageProvider);
-
     expect(updateUsersService.execute({
       user_id: 'non-existing-user',
       avatarFileName: 'avatar.jpg'
@@ -38,13 +37,7 @@ describe('Update User Avatar', () => {
   });
 
   it('should delete old avatar when updating new one avatar ', async() => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
     const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile');
-
-    const updateUsersService = new UpdateUsersService(fakeUsersRepository, fakeStorageProvider);
-
     const user = fakeUsersRepository.create({
       name: 'jose',
       email: 'ze.ssva.batera@gmail.com',

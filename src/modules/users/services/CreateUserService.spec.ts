@@ -3,14 +3,18 @@ import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepo
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import CreateUsersService from '@modules/users/services/CreateUserService';
 
+let fakeUsersRepository : FakeUsersRepository;
+let fakeHashProvider : FakeHashProvider;
+let createUsersService : CreateUsersService;
+
 describe('Create User Service', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+    createUsersService = new CreateUsersService(fakeUsersRepository, fakeHashProvider);
+  });
 
   it('should be able create new User', async() => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const createUsersService = new CreateUsersService(fakeUsersRepository, fakeHashProvider);
-
     const user = await createUsersService.execute({
       name: 'Jose Filho',
       email: 'ze.ssva.batera@gmail.com',
@@ -21,11 +25,6 @@ describe('Create User Service', () => {
   });
 
   it('should not be able to create user with email existent', async() => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const createUsersService = new CreateUsersService(fakeUsersRepository, fakeHashProvider);
-
       await createUsersService.execute({
       name: 'Jose Filho',
       email: 'jose@gmail.com',

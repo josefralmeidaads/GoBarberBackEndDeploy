@@ -14,7 +14,7 @@ import '@shared/container';
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use('/files', express.static(uploadConfig.directory)); // mostrando a imagem salva na pasta tmp
+app.use('/files', express.static(uploadConfig.uploadsFolder)); // mostrando a imagem salva na pasta tmp
 app.use(routes);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {

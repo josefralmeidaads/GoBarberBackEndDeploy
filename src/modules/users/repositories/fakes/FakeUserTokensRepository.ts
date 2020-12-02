@@ -15,6 +15,8 @@ class FakeUserTokensRepository implements IUsersTokensRepository {
         id: v4(),
         token: v4(),
         user_id,
+        created_at: new Date(),
+        updated_at: new Date(),
       })
 
       this.userTokens.push(userToken);
@@ -22,14 +24,15 @@ class FakeUserTokensRepository implements IUsersTokensRepository {
       return userToken
     }
 
-    public async findByToken(token: string): Promise<UserToken | null>{
+    public async findByToken(token: string): Promise<UserToken | undefined >{
+    
       const userToken = this.userTokens.find( findToken => findToken.token === token);
-
-      if(!userToken){
+      
+      if(!userToken?.token){
         throw new AppError("This token does not exists");
       }
 
-      return userToken || null;
+      return userToken;
     }
 }
 

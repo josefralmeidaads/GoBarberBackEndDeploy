@@ -46,7 +46,7 @@ describe('ResetePasswordService', () => {
   });
 
   it('should not be able to reset the password with non-existing token',async() => {
-    await expect( resetPasswordService.execute({ token: 'non-existing-token', password: '1234567899' })).rejects.toBeInstanceOf(AppError);
+    await expect( resetPasswordService.execute({ token: '23724585-e4e8-4eb2-a3b1-faaac2151898', password: '1234567899' })).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to reset the password with non-existing user',async() => {

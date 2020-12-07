@@ -1,11 +1,11 @@
-import { startOfHour, isBefore, getHours } from 'date-fns';
+import { startOfHour, isBefore, getHours, format } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
+import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 
 import AppError from '@shared/errors/AppError';
-import { is } from 'date-fns/locale';
 
 interface IRequest {
   provider_id: string;
@@ -18,13 +18,16 @@ class CreateAppointmentService {
   constructor(
     @inject('AppointmentsRespository')
     private IAppointmentsRepository: IAppointmentsRepository,
+
+    @inject('NotificationsRepository')
+    private INotificationsRepository: INotificationsRepository,
     ) {}
 
   public async execute({ provider_id , date, user_id }: IRequest): Promise<Appointment> {
     
     const appointmentDate = startOfHour(date); // informando a data inicial e convertendo a string date para a Date do JS
 
-    if(isBefore(appointmentDate, Date.now())){
+    if(isBefore(appointmentDate , Date.now())){
       throw new AppError('This horary is invalid!');
     }
 
@@ -44,6 +47,9 @@ class CreateAppointmentService {
 
     const appointment = await this.IAppointmentsRepository.create({ provider_id, date: appointmentDate, user_id });
 
+    const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'" );
+
+    await this.INotificationsRepository.create({ content: `Novo agendamento para ${dateFormatted}`, recipient_id:provider_id });
 
     return appointment;
   }

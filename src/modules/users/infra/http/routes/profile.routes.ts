@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { celebrate, Joi, Segments } from 'celebrate';
 
 import ProfileController from '@modules/users/infra/http/controllers/ProfileController';
 
@@ -10,7 +11,14 @@ const profileControllers = new ProfileController();
 
 profileRouter.use(ensureAuthenticated);
 
-profileRouter.put('/', profileControllers.update);
+profileRouter.put('/', celebrate({
+  [Segments.BODY]: {
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string(),
+    old_password: Joi.string(),
+  },
+}), profileControllers.update);
 profileRouter.get('/', profileControllers.show);
 
 export default profileRouter;

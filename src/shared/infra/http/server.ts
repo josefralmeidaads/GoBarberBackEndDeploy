@@ -1,8 +1,10 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
+import { errors } from 'celebrate';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use(cors());
 app.use('/files', express.static(uploadConfig.uploadsFolder)); // mostrando a imagem salva na pasta tmp
 app.use(routes);
+
+app.use(errors());
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof AppError){ // verifico seu me erro e uma instância da minha classe erro

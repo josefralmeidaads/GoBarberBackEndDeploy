@@ -29,7 +29,7 @@ export default class ProfileControllers {
   
       const updateUser = container.resolve(UpdateUserService);
 
-      const user = await updateUser.execute({ user_id, name, email, password, old_password  });
+      const user = await updateUser.execute({ user_id, name, email, password?, old_password?  });
 
       const userWithoutPassword = {
         user_id,

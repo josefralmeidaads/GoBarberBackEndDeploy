@@ -1,14 +1,17 @@
 import AppError from '@shared/errors/AppError';
+import FakeICacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import ListProviderAppointmentsService from '@modules/appointments/services/ListProviderAppointmentsService';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
+let fakeICacheProvider: FakeICacheProvider;
 let listProviderAppointmentsService: ListProviderAppointmentsService;
 
 describe('ListProviderAppointmentsService', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    listProviderAppointmentsService = new ListProviderAppointmentsService(fakeAppointmentsRepository);
+    fakeICacheProvider = new FakeICacheProvider();
+    listProviderAppointmentsService = new ListProviderAppointmentsService(fakeAppointmentsRepository, fakeICacheProvider);
   });
 
   it('should be able list ti provider appointments', async() => {

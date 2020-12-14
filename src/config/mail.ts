@@ -8,10 +8,9 @@ interface IMailConfig {
     },
   };
 }
-
+console.log(process.env.MAIL_DRIVER);
 export default {
-  driver: process.env.MAIL_DRIVER ,
-
+  driver: process.env.MAIL_DRIVER,
   defaults: {
     from: {
       name: 'Equipe Central Barber',

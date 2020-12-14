@@ -8,6 +8,7 @@ import { errors } from 'celebrate';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
+import rateLimiter from '@shared/infra/http/middlewares/raterLimiter';
 import routes from '@shared/infra/http/routes';
 
 import '@shared/infra/typeorm';
@@ -16,6 +17,7 @@ import '@shared/container';
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(rateLimiter);
 app.use('/files', express.static(uploadConfig.uploadsFolder)); // mostrando a imagem salva na pasta tmp
 app.use(routes);
 

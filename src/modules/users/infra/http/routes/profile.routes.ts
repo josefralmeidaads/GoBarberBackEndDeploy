@@ -15,8 +15,8 @@ profileRouter.put('/', celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
     email: Joi.string().email().required(),
-    password: Joi.string(),
-    old_password: Joi.string(),
+    password: Joi.string().allow(null).allow(''),
+    old_password: Joi.string().allow(null).allow(''),
   },
 }), profileControllers.update);
 profileRouter.get('/', profileControllers.show);

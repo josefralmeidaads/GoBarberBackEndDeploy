@@ -26,6 +26,8 @@ export default class ListProviderAppointmentsService {
     let listAppointments: Appointments[] = [];
     let appointments = await this.cacheProvider.recover<Appointments[]>(`providers_appointments_list:${provider_id}:${year}-${month}-${day}`);
 
+    //let appointments = null;
+
     if(!appointments){
       listAppointments = await this.appointmentsRepository.findAllInDayFromProvider({ provider_id, day, month, year});
       console.log('query de listagem de appointments feita!');

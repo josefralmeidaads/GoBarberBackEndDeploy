@@ -15,8 +15,8 @@ import '@shared/infra/typeorm';
 import '@shared/container';
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use(rateLimiter);
 app.use('/files', express.static(uploadConfig.uploadsFolder)); // mostrando a imagem salva na pasta tmp
 app.use(routes);

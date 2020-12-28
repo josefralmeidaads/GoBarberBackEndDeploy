@@ -15,7 +15,8 @@ export default class UserAvatarControllers {
       email: user.email,
       created_at: user.created_at,
       update_at: user.update_at,
-      avatar: user.avatar
+      avatar: user.avatar,
+      avatar_url: user.getAvatarUrl(),
     };
 
     return response.json(userWithoutPassword);

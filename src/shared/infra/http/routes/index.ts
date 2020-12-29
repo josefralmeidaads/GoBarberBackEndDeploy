@@ -15,5 +15,7 @@ routes.use('/password', passwordRouter);
 routes.use('/profile', profileRouter);
 routes.use('/providers', providerRouter);
 
+// teste
+
 export default routes;
 

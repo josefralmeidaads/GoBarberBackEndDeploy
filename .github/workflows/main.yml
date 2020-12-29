@@ -32,7 +32,33 @@ jobs:
             host: ${{ secrets.SSH_HOST }}
             username: ${{ secrets.SSH_USERNAME }}
             port: ${{ secrets.SSH_PORT }}
-            key_path: "~/home/deploy/.ssh/authorized_keys" 
+            key: "-----BEGIN RSA PRIVATE KEY-----
+                  MIIEogIBAAKCAQEAi0KEzHCIus4KUxd8n8EChb0MFNYcf3DDDImvczEEwS1Ebr1v
+                  jeGfDa1FZIGxuzPO6Qh/5akMvAs4FUr7+UznFB+F3UR4Lnfru43djBo3RB4Hd2TB
+                  Sw1rNFoyxDBqN7Ci/k6UOjJRG+7X2QIwhs4bDlWFfOWBofwaJvTCAdQzX+Vlie3E
+                  jM7b4FnEbR7Hn4wyV9dt2iTeYnGnSG4UjuRz1Qsf4/cjLt26ijljdR+Th6/FZekV
+                  oLkIL5pjteqfeatncBFs0NT42kRd8WdMALgWVWNX4lRYBSKoGi4qRzzOs8c0rWXo
+                  JH7YurL4qO3b8ryMMIsf6NdKDAvDPBvXC+HY0QIBJQKCAQBLRoz44uIfyVGwX7j8
+                  aFRj93wm8EbBbWKDUVfrPRdTqcQgLwvd/Wq7SOc9Py+jdfNNiA3IP7PbRFWqpRKU
+                  mEWOVjqFcR5eTqjvwk495KhAfu9HdLuCg8s+5KXR1PslBYiJdpVP49jQ1CGlu/6O
+                  DosqV73G+JkZSgBMaKA4VwcDZmrbojpnxth9Bdp6uzrDZm7QMX0lndhpGoOtc6r/
+                  UJ434PYEuoa9jv5Ggr29idcl3oPcaI5eoMrsny9phONymb0xwfgM4EidO2nK9wmM
+                  Ijqzv9KbxH2qZzj9JoqAppg5EkzQHgxwvuVQPfacsIQNm6VkgcURLYa5R2OcsWD6
+                  Q6s9AoGBAPRa/S7++UUNSUwvxq+va6H5oe97L3Ha477cOWJRubBPPiddKmzVLjYo
+                  63f1EpWRGwi7UnIxFUjk1+6AYeHCpcXFhrUBcxuSHOC9RkbBoc7wSGI8nJ4ZMvRT
+                  oyPv08mLBxKJV3sB65a86Tn0xZx5iCQK4MqeRMlvNfZb/yaGLG4nAoGBAJHlaty0
+                  P1Me+NdAsOs51kNdDSOmKwKR6agE64KxomuebMr+DT0Umi34daYUmsmKH3vsbs9A
+                  k+F7aMPlhhjvz51BsKzqwvCLrMZJcZn71vRlXnzSWQSj4/C/A7lPzmuL9+DWPTyF
+                  MhnC8LZ4rn5gB6le7XWEZK3GEbr+OvBQUdRHAoGBALjq6RylRwPStAJNqx0qzf4J
+                  BOyUkptZicDeAemJ9E4SdDl276xOTHwDSmidyN/jbmd5AB8QYyJn/VqKqvAI7Cb2
+                  WBpGSUVL+i2IUNuZc4fYbiDT7CSdcqsO3FKL+jenevlFVvVNj7BXm70n731VDRRb
+                  QlQkvm7sYDAORIvbKIq1AoGAejzBUSFlfP5GHCFxonyQ7FThfrunfrGaQKotGnkn
+                  N5KSgI+qOhguJoQPiyYFJWXjBvaGWp3jrxResfentAcxaBRxbkgmyYnIG8D+UJS7
+                  BB2UWr4TOz00mUYX4HNMFOrkcETLhbu0WsXsRdq7tf1uM/WWhQ4PKc92o5a7wmzO
+                  8B8CgYEAtb89WQIpjQ9YLdWIu+vXfp8fCvE7Yx7go97rodMu7GtrO0RiIAGBFpEA
+                  OfjMXYTj54Mdmyifb74VWq+TIZ6hPvkufoXg3V2AXzQuc2fAzs8Ez96hq8RuWwOP
+                  W7dbDFyEvRtd65mhhPwGEbivo2vGnd+sfC7bbJ9I1+201DZgiYE=
+                  -----END RSA PRIVATE KEY-----" 
             source: "dist"
             target: "/home/deploy/test"
     

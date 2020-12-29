@@ -32,7 +32,7 @@ jobs:
             host: ${{ secrets.SSH_HOST }}
             username: ${{ secrets.SSH_USERNAME }}
             port: ${{ secrets.SSH_PORT }}
-            key_path: "/home/deploy/.ssh/authorized_keys" 
+            key_path: "~/home/deploy/.ssh/authorized_keys" 
             source: "dist"
             target: "/home/deploy/test"
     

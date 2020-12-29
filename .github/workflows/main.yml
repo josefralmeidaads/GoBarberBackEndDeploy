@@ -32,7 +32,7 @@ jobs:
             host: ${{ secrets.SSH_HOST }}
             username: ${{ secrets.SSH_USERNAME }}
             port: ${{ secrets.SSH_PORT }}
-            key: ${{ secrets.SSH_KEY}} 
+            key: "C:/Users/Jose/Desktop/SSH/github_actions_privado.txt" 
             source: "dist"
             target: "/home/deploy/test"
     

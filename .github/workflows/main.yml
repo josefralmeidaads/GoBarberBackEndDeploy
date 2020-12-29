@@ -34,7 +34,7 @@ jobs:
             port: ${{ secrets.SSH_PORT }}
             key: ${{ secrets.SSH_KEY }}
             source: "dist"
-            target: "/home/deploy/test"
+            target: "test"
     
     # Substituir o código existente na pasta "dist" pelo novo código
     # Executar "yarn" na Dgital Ocean

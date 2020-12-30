@@ -27,10 +27,10 @@ export class User{
     avatar: string;
 
     @Expose({ name: 'avatar_url' })
-    getAvatarUrl(): string | null | undefined{
+    getAvatarUrl(): string | undefined {
 
       if(!this.avatar){
-        return null;
+        return undefined
       }
 
       switch(uploadConfig.driver){

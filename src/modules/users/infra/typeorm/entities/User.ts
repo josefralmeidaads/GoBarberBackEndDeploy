@@ -30,7 +30,10 @@ export class User{
     getAvatarUrl(): string | undefined {
 
       if(!this.avatar){
-        return undefined
+        if(this.avatar === undefined){
+          this.avatar = String(null)
+        }
+        return this.avatar
       }
 
       switch(uploadConfig.driver){

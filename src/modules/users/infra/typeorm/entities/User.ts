@@ -27,7 +27,7 @@ export class User{
     avatar: string;
 
     @Expose({ name: 'avatar_url' })
-    getAvatarUrl(): string | null{
+    getAvatarUrl(): string | null | undefined{
 
       if(!this.avatar){
         return null;

@@ -25,7 +25,7 @@ export class User{
 
     @Column()
     avatar: string;
-
+    //teste
     @Expose({ name: 'avatar_url' })
     getAvatarUrl(): string | undefined {
 
